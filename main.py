@@ -4,7 +4,11 @@ import pytest
 
 class Getter:
     """
-    This is non-data descriptor
+    A non-data descriptor that provides a custom getter method for attributes.
+
+   Attributes defined using this descriptor are stored as private attributes
+   prefixed with "__". The getter method retrieves the value of the private
+   attribute when the attribute is accessed on an instance of the class.
     """
 
     def __set_name__(self, owner, name):
@@ -16,7 +20,16 @@ class Getter:
 
 class Sneakers:
     """
-    It creats Sneakers
+    Represents a pair of sneakers with various attributes.
+
+   Attributes:
+       brand (str): The brand name of the sneakers.
+       size (float): The size of the sneakers.
+       color (str): The color of the sneakers.
+       price (Decimal): The price of the sneakers.
+       quantity (int): The quantity of sneakers in stock.
+       material (str): The material of the sneakers.
+       numberOfSales (int): The number of times the sneakers have been sold.
     """
 
     brand = Getter()
@@ -100,7 +113,10 @@ class Sneakers:
 
 class ShoesStore:
     """
-    It creats shops/
+     A store that manages a collection of sneakers.
+
+   Attributes:
+       things (list): A list of Sneakers objects representing the inventory.
     """
 
     @classmethod
@@ -117,7 +133,7 @@ class ShoesStore:
             self.__validator_sneakers(sneakrs)
             self.__things.append(sneakrs)
 
-    def addSneaker(self, *args):
+    def add_sneaker(self, *args):
         """
         Add one or more sneakers to the inventory.
         """
@@ -176,14 +192,15 @@ class ShoesStore:
 
 
 if __name__ == "__main__":
-    Nike = Sneakers("Nike", 10, "Black", 100, 35, "Leather", 1000)
-    Adidas = Sneakers("Adidas", 9, "White", 80, 3, "Mesh", 800)
-    Reebok = Sneakers("Reebok", 11, "Red", 120, 9, "Synthetic", 1200)
-    Vans = Sneakers("Vans", 9, "Checkerboard", 65, 3, "Canvas", 750)
-    New_Balance = Sneakers("New Balance", 10, "Gray", 95, 4, "Mesh", 850)
-    Puma = Sneakers("Puma", 8, "Red", 75, 2, "Suede", 750)
-    Puma2 = Sneakers("Puma", 4, "Reed", 755, 2, "Suede", 750)
-    ShoesStorePro = ShoesStore(Nike, Adidas, Reebok, Vans, New_Balance, Puma2, Puma)
-    WrongSnekaers = Sneakers("wrong info", 10, "red", 100, 34, True, 3245)
+    nike = Sneakers("Nike", 10, "Black", 100, 35, "Leather", 1000)
+    adidas = Sneakers("Adidas", 9, "White", 80, 3, "Mesh", 800)
+    reebok = Sneakers("Reebok", 11, "Red", 120, 9, "Synthetic", 1200)
+    vans = Sneakers("Vans", 9, "Checkerboard", 65, 3, "Canvas", 750)
+    new_balance = Sneakers("New Balance", 10, "Gray", 95, 4, "Mesh", 850)
+    puma = Sneakers("Puma", 8, "Red", 75, 2, "Suede", 750)
+    puma2 = Sneakers("Puma", 4, "Reed", 755, 2, "Suede", 750)
+    shoesstorepro = ShoesStore(nike, adidas, reebok, vans, new_balance, puma2, puma)
+    shoesstorepro.print_inventory()
+
 else:
     print("Code is imported")
